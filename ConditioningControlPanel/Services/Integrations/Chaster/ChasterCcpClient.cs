@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -208,7 +209,7 @@ namespace ConditioningControlPanel.Services.Integrations.Chaster
                     EventId = Guid.NewGuid().ToString(),
                     Type = "session_started",
                     CcSessionId = ccSessionId,
-                    OccurredAt = DateTimeOffset.Now.ToString("O"),
+                    OccurredAt = DateTimeOffset.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'", CultureInfo.InvariantCulture),
                     SessionName = string.IsNullOrWhiteSpace(sessionName) ? null : sessionName,
                     PlannedDurationSeconds = Math.Max(0, (int)Math.Round(plannedMinutes * 60.0))
                 };
@@ -244,7 +245,7 @@ namespace ConditioningControlPanel.Services.Integrations.Chaster
                     EventId = Guid.NewGuid().ToString(),
                     Type = "session_ended",
                     CcSessionId = ccSessionId,
-                    OccurredAt = DateTimeOffset.Now.ToString("O"),
+                    OccurredAt = DateTimeOffset.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'", CultureInfo.InvariantCulture),
                     Outcome = outcome
                 };
 
