@@ -1,0 +1,79 @@
+        <!-- ============================================================
+             CHASTER CONNECTION — reporting client only
+             ============================================================ -->
+        <Border x:Name="ChasterCard" CornerRadius="12" Padding="0" Margin="0,0,0,10"
+                Background="{DynamicResource ElevatedSurfaceBrush}"
+                BorderBrush="{StaticResource SectionHueDevicesBorderBrush}" BorderThickness="1"
+                Loaded="ChasterCard_Loaded" Unloaded="ChasterCard_Unloaded">
+            <Grid>
+                <Border CornerRadius="11" Background="{StaticResource SectionHueDevicesWashBrush}"/>
+                <Border Width="3" HorizontalAlignment="Left" Margin="0,10" CornerRadius="0,2,2,0"
+                        Background="{StaticResource SectionHueDevicesBrush}"/>
+                <StackPanel Margin="16,13,16,13">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Border Width="34" Height="34" CornerRadius="10" Margin="0,0,11,0"
+                                Background="{DynamicResource AccentTintedBgBrush}"
+                                BorderBrush="{StaticResource SectionHueDevicesBorderBrush}" BorderThickness="1">
+                            <Image Width="18" Height="18"
+                                   Source="{Binding Source='🔗', Converter={StaticResource EmojiToImageSource}}"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Chaster connection" Foreground="{StaticResource SectionHueDevicesBrush}"
+                                       FontSize="14" FontWeight="SemiBold"/>
+                            <TextBlock Text="CCP only reports session start and end. Chaster owns all rules and consequences."
+                                       Foreground="{DynamicResource TextMutedBrush}" FontSize="11"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Grid Margin="0,0,0,7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Extension server" Style="{StaticResource SettingLabel}"
+                                   FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" x:Name="TxtChasterServerUrl"
+                                 Text="" Padding="9,6"
+                                 ToolTip="Public HTTPS origin hosting the Chaster CCP Discipline extension, e.g. https://ccp.example.com/"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Connection code" Style="{StaticResource SettingLabel}"
+                                   FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" x:Name="TxtChasterPairCode" CharacterCasing="Upper"
+                                 MaxLength="9" Padding="9,6" Margin="0,0,8,0"
+                                 ToolTip="Enter the one-time code shown on the Chaster extension page."/>
+                        <Button Grid.Column="2" x:Name="BtnChasterPair" Content="Connect"
+                                Style="{StaticResource OutlineButton}" Padding="13,6" Margin="0,0,8,0"
+                                Click="BtnChasterPair_Click"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock x:Name="TxtChasterStatus" Text="Not connected"
+                                       Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="TxtChasterOutbox" Text="Pending events: 0"
+                                       Foreground="{DynamicResource TextMutedBrush}" FontSize="11" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button x:Name="BtnChasterRefresh" Content="Check / retry"
+                                    Style="{StaticResource OutlineButton}" Padding="11,5" Margin="0,0,7,0"
+                                    Click="BtnChasterRefresh_Click"/>
+                            <Button x:Name="BtnChasterDisconnect" Content="Disconnect"
+                                    Style="{StaticResource OutlineButton}" Padding="11,5"
+                                    Click="BtnChasterDisconnect_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
